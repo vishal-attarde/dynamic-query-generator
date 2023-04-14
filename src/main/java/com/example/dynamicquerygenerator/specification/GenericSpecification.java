@@ -1,5 +1,6 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.specification;
 
+import com.example.dynamicquerygenerator.domain.filter.AbstractFilter;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

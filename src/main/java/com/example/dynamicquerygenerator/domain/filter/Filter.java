@@ -1,5 +1,6 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.filter;
 
+import com.example.dynamicquerygenerator.domain.filter.FilterOperator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

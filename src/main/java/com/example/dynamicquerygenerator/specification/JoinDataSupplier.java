@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.specification;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;

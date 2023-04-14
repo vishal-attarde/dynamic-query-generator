@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.filter;
 
 public enum FilterOperator {
 	EQUAL_TO,

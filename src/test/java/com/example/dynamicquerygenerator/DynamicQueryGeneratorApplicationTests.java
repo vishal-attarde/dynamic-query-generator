@@ -1,5 +1,10 @@
 package com.example.dynamicquerygenerator;
 
+import com.example.dynamicquerygenerator.domain.entity.Employee;
+import com.example.dynamicquerygenerator.domain.filter.*;
+import com.example.dynamicquerygenerator.specification.GenericSpecification;
+import com.example.dynamicquerygenerator.specification.JoinDataSupplier;
+import com.example.dynamicquerygenerator.util.JpaQueryUtils;
 import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaQuery;

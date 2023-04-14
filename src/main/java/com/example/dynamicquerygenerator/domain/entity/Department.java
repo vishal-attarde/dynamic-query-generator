@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

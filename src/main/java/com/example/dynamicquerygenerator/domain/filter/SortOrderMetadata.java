@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

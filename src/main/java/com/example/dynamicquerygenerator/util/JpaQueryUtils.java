@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.util;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

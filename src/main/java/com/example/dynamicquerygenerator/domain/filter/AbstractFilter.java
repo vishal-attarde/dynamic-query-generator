@@ -1,5 +1,6 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.filter;
 
+import com.example.dynamicquerygenerator.domain.filter.Filter;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;

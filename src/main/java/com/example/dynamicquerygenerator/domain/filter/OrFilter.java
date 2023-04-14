@@ -1,4 +1,4 @@
-package com.example.dynamicquerygenerator;
+package com.example.dynamicquerygenerator.domain.filter;
 
 import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;
