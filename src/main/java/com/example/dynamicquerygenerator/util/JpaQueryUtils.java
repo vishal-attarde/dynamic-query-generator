@@ -1,21 +1,27 @@
 package com.example.dynamicquerygenerator.util;
 
+import com.example.dynamicquerygenerator.domain.entity.Employee;
+import com.example.dynamicquerygenerator.domain.filter.SearchQuery;
+import com.example.dynamicquerygenerator.domain.filter.SortOrder;
+import com.example.dynamicquerygenerator.domain.filter.SortOrderMetadata;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class JpaQueryUtils {
@@ -94,5 +100,34 @@ public class JpaQueryUtils {
 		}
 		query.orderBy(Collections.<Order> emptyList());
 		return entityManager.createQuery(query);
+	}
+
+
+	public PageRequest getPageRequest(SearchQuery searchQuery) {
+
+		List<SortOrderMetadata> sortOrderMetadataList = searchQuery.getSortOrderMetadataObjects();
+		List<Sort.Order> orders = new ArrayList<>();
+		if (!CollectionUtils.isEmpty(sortOrderMetadataList)) {
+			orders.addAll(sortOrderMetadataList.stream().map(sortOrderMetadata -> {
+				if (sortOrderMetadata.getOrder().equals(SortOrder.ASC)) {
+					return Sort.Order.asc(sortOrderMetadata.getField());
+				}
+				else {
+					return Sort.Order.desc(sortOrderMetadata.getField());
+				}
+			}).filter(Objects::nonNull).collect(Collectors.toList()));
+		}
+
+		Sort sort = Sort.by(orders);
+		return PageRequest.of(searchQuery.getPageNumber(), searchQuery.getPageSize(), sort);
+	}
+
+
+	public Page<Tuple> getPagedData(Specification specification,SearchQuery searchQuery) {
+		PageRequest request = getPageRequest(searchQuery);
+		TypedQuery<Tuple> tupleTypedQuery = getTupleQuery(specification, Employee.class, Sort.by(Sort.Direction.DESC,"salary"));
+		Page<Tuple> tuplePage =  isUnpaged(request) ? new PageImpl<Tuple>(tupleTypedQuery.getResultList())
+				: getPage(tupleTypedQuery, Employee.class, request, specification);
+		return tuplePage;
 	}
 }

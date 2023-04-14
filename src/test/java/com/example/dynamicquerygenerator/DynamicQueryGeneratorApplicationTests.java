@@ -49,14 +49,8 @@ class DynamicQueryGeneratorApplicationTests {
 		searchQuery.setPageNumber(0);
 		searchQuery.setSortOrderMetadataObjects(Arrays.asList(sortOrderMetadata));
 
-		Specification<Employee> specification = getEmployeeDepartmentJoinSpecification(orFilter);
-
-
-		PageRequest request = PageRequest.of(0,12, Sort.Direction.DESC,"salary");
-		TypedQuery<Tuple> tupleTypedQuery = queryUtils.getTupleQuery(specification, Employee.class, Sort.by(Sort.Direction.DESC,"salary"));
-		Page<Tuple> tuplePage =  isUnpaged(request) ? new PageImpl<Tuple>(tupleTypedQuery.getResultList())
-				: queryUtils.getPage(tupleTypedQuery, Employee.class, request, specification);
-
+		Specification<Employee> specification = getEmployeeDepartmentJoinSpecification(searchQuery.getFilter());
+		Page<Tuple> tuplePage =  queryUtils.getPagedData(specification,searchQuery);
 		List<Tuple> serviceOrderDetailsTupleList = tuplePage.getContent();
 	}
 
