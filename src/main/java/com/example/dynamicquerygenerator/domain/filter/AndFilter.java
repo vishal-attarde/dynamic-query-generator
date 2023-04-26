@@ -1,9 +1,7 @@
 package com.example.dynamicquerygenerator.domain.filter;
 
 import jakarta.persistence.criteria.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -12,7 +10,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class AndFilter extends AbstractFilter {
 
     private List<AbstractFilter> filters;
